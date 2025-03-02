@@ -1,4 +1,3 @@
-import exp from 'constants';
 import React from 'react';
 import {auth} from "@clerk/nextjs/server";
 import { redirect } from 'next/navigation';
@@ -7,9 +6,8 @@ import { chats } from "@/lib/db/schema";
 import { eq } from 'drizzle-orm';
 import ChatSideBar from '@/components/ChatSideBar';
 import PDFViewer from '@/components/PDFViewer';
-import { GetObjectCommand, S3, S3Client } from '@aws-sdk/client-s3';
+import { GetObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
-import { url } from 'inspector';
 import ChatComponent from '@/components/ChatComponent';
 
 const s3Client = new S3Client({ 
@@ -20,11 +18,6 @@ const s3Client = new S3Client({
     }
     });
 
-type Props = {
-    params:{
-        chatId: string;
-    }
-};
 
 export async function downloadFromS3(bucket: string, key: string) {
     const command = new GetObjectCommand({

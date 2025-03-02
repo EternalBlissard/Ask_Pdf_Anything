@@ -1,11 +1,10 @@
-import { LoadS3IntoPineCone } from "@/lib/pinecone";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import {db} from "@/lib/db"; 
 import {chats} from "@/lib/db/schema";
-import {serial, text, timestamp, varchar} from "drizzle-orm/pg-core";
+// import {serial, text, timestamp, varchar} from "drizzle-orm/pg-core";
 import { downloadFromS3 } from "@/lib/pinecone";
 import {auth} from "@clerk/nextjs/server";
-export async function POST(req: Request, res: Response){
+export async function POST(req: Request){
     const {userId} = await auth();
     if(!userId){
         return NextResponse.json({error:"unauthorized"}, {"status": 401})
@@ -14,7 +13,6 @@ export async function POST(req: Request, res: Response){
         const body = await req.json();
         const {file_key, file_name} = body;
         console.log(file_key, file_name);
-        const pages = await LoadS3IntoPineCone(file_key);
         const chat_id = await db.insert(chats).values({
             fileKey: file_key,
             fileUrl: await downloadFromS3(process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME!, file_key),

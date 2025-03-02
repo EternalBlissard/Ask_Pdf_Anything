@@ -1,5 +1,5 @@
 import { getEmbeddings } from './embeddings';
-import { Pinecone, PineconeRecord } from '@pinecone-database/pinecone';
+import { Pinecone} from '@pinecone-database/pinecone';
 import {convertToASCII} from './utils';
 
 export async function getMatchesUsingEmbeddings(embeddings: number[], file_key: string) {
@@ -40,7 +40,7 @@ export async function getContext(query:string, file_key: string) {
         pageNumber: number;
     }
     console.log("Qualifying Matches", qualifyingMatches);
-    let docs = qualifyingMatches.map((match) => (match.metadata as Metadata).text);
+    const docs = qualifyingMatches.map((match) => (match.metadata as Metadata).text);
     console.log("Context", docs);
     return docs.join('\n').substring(0, 10000);
 }

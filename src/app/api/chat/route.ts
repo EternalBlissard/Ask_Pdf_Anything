@@ -3,7 +3,7 @@ import { createOpenAI } from '@ai-sdk/openai';
 import {getContext} from '@/lib/context';
 import { db } from '@/lib/db';
 import { chats, messages as _messages } from '@/lib/db/schema';
-import { eq, not } from 'drizzle-orm';
+import { eq} from 'drizzle-orm';
 import { NextResponse } from 'next/server';
 import { Message } from 'ai';
 

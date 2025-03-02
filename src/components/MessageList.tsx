@@ -9,7 +9,7 @@ type Props = {
     loadingDone: boolean
 }
 
-const MessageList = ({messages, isLoading, loadingDone}: Props) => {
+const MessageList = ({messages, isLoading}: Props) => {
     // if(loadingDone && messages.length === 0){
     //     return (
     //         <div className='flex items-center justify-center h-full'>
@@ -17,8 +17,7 @@ const MessageList = ({messages, isLoading, loadingDone}: Props) => {
     //         </div>
     //     )
     // }
-    console.log("Messages List",messages)
-    console.log("Loading",isLoading)
+
     if(isLoading){
         return (
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">

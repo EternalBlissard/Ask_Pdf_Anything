@@ -1,6 +1,6 @@
 'use client'
 import { uploadToS3 } from '@/lib/s3';
-import { useMutation, type UseMutationResult } from '@tanstack/react-query';
+import { useMutation} from '@tanstack/react-query';
 import { Inbox, Loader2 } from 'lucide-react';
 import React, {useState} from 'react';
 import { useDropzone } from 'react-dropzone';

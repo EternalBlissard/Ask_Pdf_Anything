@@ -1,11 +1,8 @@
 'use client'
 import React from 'react';
-import {auth} from "@clerk/nextjs/server";
 import Link from 'next/link';
 import { Button } from './ui/button';
 import { MessageCircle, PlusCircle } from 'lucide-react';
-import { redirect } from 'next/navigation';
-import { db } from "@/lib/db";
 import { DrizzleChat } from '@/lib/db/schema';
 import { cn } from "@/lib/utils"
 

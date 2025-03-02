@@ -1,4 +1,4 @@
-import { neon, neonConfig, NeonDbError } from "@neondatabase/serverless";
+import { neon, neonConfig} from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-http";
 
 neonConfig.fetchConnectionCache = true 
