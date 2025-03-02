@@ -8,8 +8,8 @@ import md5 from 'md5';
 import { getEmbeddings } from './embeddings';
 import { Pinecone, PineconeRecord } from '@pinecone-database/pinecone';
 import {Document, RecursiveCharacterTextSplitter} from '@pinecone-database/doc-splitter'
-import { doublePrecision } from 'drizzle-orm/pg-core';
-import { fileURLToPath } from 'url';
+// import { doublePrecision } from 'drizzle-orm/pg-core';
+// import { fileURLToPath } from 'url';
 import { convertToASCII } from './utils';
 // import { downloadFromS3 } from './s3-server';       
 let pinecone: Pinecone | null = null;
@@ -92,7 +92,7 @@ const documents = await Promise.all(docs.map(page=>prepareDocument(page)));
 const records = await Promise.all(documents.flat().map(doc=>embedDocument(doc)));
 
 // Load the Pinecone client
-const client = await getPinecone();
+// const client = await getPinecone();
 
 console.log("Indexing into Pinecone");
 const namespace = convertToASCII(file_key);
@@ -119,7 +119,8 @@ return new TextDecoder().decode(encoder.encode(str).slice(0, numBytes));
 }
 
 async function prepareDocument(page: PDFPage) {
-    let { pageContent, metadata } = page;
+    let { pageContent } = page;
+    const { metadata } = page;
     pageContent = pageContent.replace(/\n/g, '');
     const splitter = new RecursiveCharacterTextSplitter();
     const docs = await splitter.splitDocuments([

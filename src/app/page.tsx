@@ -3,12 +3,11 @@
 import { Button } from "@/components/ui/button";
 import { UserButton, useUser } from "@clerk/nextjs";
 import Link from "next/link";
-import { useRouter } from "next/navigation"; // Note: Import from 'next/navigation'
+// import { useRouter } from "next/navigation"; // Note: Import from 'next/navigation'
 import { LogIn } from 'lucide-react';
 import FileUpload from "@/components/fileUpload";
 
 export default function Home() {
-  const router = useRouter();
   const { user } = useUser();
   const isAuthenticated = !!user;
   

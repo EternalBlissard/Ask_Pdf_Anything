@@ -19,7 +19,7 @@ const s3Client = new S3Client({
     });
 
 
-export async function downloadFromS3(bucket: string, key: string) {
+async function downloadFromS3_page(bucket: string, key: string) {
     const command = new GetObjectCommand({
         Bucket: bucket,
         Key: key
@@ -30,7 +30,7 @@ export async function downloadFromS3(bucket: string, key: string) {
     }
 
 
-const ChatPage = async ({params}: {params: Promise<{chatId: string}>}) => {
+const page = async ({params}: {params: Promise<{chatId: string}>}) => {
     const {chatId} = await params;
     const {userId} = await auth();
     if(!userId){
@@ -60,7 +60,7 @@ const ChatPage = async ({params}: {params: Promise<{chatId: string}>}) => {
         return redirect('/');
     }
     // # Get url from S3
-    const Currurl = await downloadFromS3(process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME!, currChat.fileKey);
+    const Currurl = await downloadFromS3_page(process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME!, currChat.fileKey);
     if(!Currurl){
         return redirect('/');
     }
@@ -85,4 +85,4 @@ const ChatPage = async ({params}: {params: Promise<{chatId: string}>}) => {
     );
     }
 
-export default ChatPage;
+export default page;
